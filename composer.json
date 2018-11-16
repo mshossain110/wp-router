@@ -1,0 +1,13 @@
+{
+    "name": "mshossain110/wp-router",
+    "description": "Rest ruoter for word press",
+    "type": "library",
+    "license": "BSD",
+    "authors": [
+        {
+            "name": "mshossain110",
+            "email": "mshossain110@gmail.com"
+        }
+    ],
+    "require": {}
+}
