@@ -9,5 +9,10 @@
             "email": "mshossain110@gmail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "WP_Router": "core/"
+        }
+    }
 }
