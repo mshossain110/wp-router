@@ -2,7 +2,7 @@
     "name": "mshossain110/wp-router",
     "description": "Rest ruoter for WordPress",
     "type": "library",
-    "license": "BSD",
+    "license": "MIT",
     "authors": [
         {
             "name": "mshossain110",
