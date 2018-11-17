@@ -2,7 +2,7 @@
 
 namespace WP_Router;
 
-use WP_Router/Trair/Singletonable;
+use WP_Router\Traits\Singletonable;
 
 class Router {
 	/**

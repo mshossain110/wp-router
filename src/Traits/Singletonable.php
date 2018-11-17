@@ -1,6 +1,6 @@
 <?php
 
-namespace WP_Router\Trait;
+namespace WP_Router\Traits;
 
 use Reflection;
 

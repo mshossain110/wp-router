@@ -1,6 +1,6 @@
 {
     "name": "mshossain110/wp-router",
-    "description": "Rest ruoter for word press",
+    "description": "Rest ruoter for WordPress",
     "type": "library",
     "license": "BSD",
     "authors": [
@@ -9,10 +9,12 @@
             "email": "mshossain110@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "php": "^5.4"
+    },
     "autoload": {
         "psr-4": {
-            "WP_Router": "core/"
+            "WP_Router\\": "src/"
         }
     }
 }
