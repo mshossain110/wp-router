@@ -21,9 +21,7 @@ class WP_Router {
 	 *
 	 * @return void
 	 */
-	public static function register( $routes = [] ) {
-		static::$routes = $routes;
-
+	public static function register( ) {
         add_action( 'rest_api_init', array( new WP_Router, 'make_wp_rest_route' ) );
 	}
 
@@ -33,13 +31,20 @@ class WP_Router {
 	 * @return void
 	 */
     public function make_wp_rest_route() {
-		$routes = static::$routes;
+		$routes = Router::get_routes();
+		
 
 		foreach ( $routes as $route ) {
 			$uri         = '/' . $route['uri'];
 			$http_verb   = $route['http_verb'];
-			$controller  = new $route['controller'];
-			$method      = $route['method'];
+			if ($route['controller'] == null){
+				$callback = $route['method'];
+			} else {
+				$controller  = new $route['controller'];
+				$method      = $route['method'];
+				$callback = array( $controller, $method );
+			}
+			
 			$permissions = $route['permission'];
 			$validator   = $route['validator'];
 			$sanitizer   = $route['sanitizer'];
@@ -48,7 +53,7 @@ class WP_Router {
 
 			register_rest_route( $namespace, $uri, array(
 				'methods'  => $http_verb,
-				'callback' => array( $controller, $method ),
+				'callback' => $callback,
 				'permission_callback' => function ( WP_REST_Request $request ) use ( $permissions ) {
 					return $this->check_permission( $request, $permissions );
 				},

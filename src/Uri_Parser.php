@@ -19,6 +19,10 @@ class Uri_Parser {
         if (count( $handler ) === 2) {
             return $handler;
         }
+
+        if (count( $handler ) === 1 && function_exists($handler[0])) {
+            return [null, $handler[0]];
+        }
         return new \WP_Error( 'WP_Router', __( str_replace( '/', '\\', $str ) . " is not a valid route handler", "wp_router" ) );
     }
 
@@ -30,12 +34,16 @@ class Uri_Parser {
      * @return string (Callable namespace of the given string of a class
      * if exists; otherwise throws exception.)
      */
-    public function get_controller( $str ) {
+    public function get_controller( $str = null ) {
+        if ($str == null) {
+            return null;
+        }
         $class = str_replace( '/', '\\', $str );
 
         if ( class_exists( $class ) ) {
             return $class;
         }
+
         return new \WP_Error( 'WP_Router', __( $class . " is not found", "wp_router" ) );
     }
 
@@ -50,6 +58,9 @@ class Uri_Parser {
      * otherwise throws exception.)
      */
     public function get_method( $controller, $method ) {
+        if ($controller == null && function_exists($method)) {
+            return $method;
+        }
         $obj = new $controller();
 
         if ( method_exists( $obj, $method ) ) {
